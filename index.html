@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login with CENTRA ID</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      font-family: system-ui;
+      background: #0f172a;
+      color: #f8fafc;
+      display: flex; justify-content: center; align-items: center;
+      height: 100vh; margin:0; padding:16px;
+    }
+    .box {
+      background:#1e293b; padding:24px; width:340px;
+      border-radius:16px; border:1px solid rgba(148,163,184,.25);
+    }
+    h1 { text-align:center; margin:0 0 6px; }
+    p { text-align:center; color:#94a3b8; }
+
+    input {
+      width:100%; padding:10px; margin-bottom:12px;
+      border-radius:8px; border:1px solid #334155;
+      background:#0f172a; color:#e2e8f0;
+    }
+    button {
+      width:100%; padding:10px 0;
+      border-radius:999px; border:none;
+      background:linear-gradient(135deg,#22d3ee,#6366f1);
+      color:white; font-weight:600;
+      cursor:pointer;
+    }
+    .error { color:#f87171; font-size:.85rem; min-height:1rem; }
+  </style>
+</head>
+<body>
+
+<div class="box">
+  <h1>⦵ CENTRA LOGIN</h1>
+  <p>Enter your CENTRA ID</p>
+
+  <input id="cid" placeholder="CID-DEMO-001" />
+  <input id="pwd" type="password" placeholder="Password" />
+
+  <button id="loginBtn">Continue</button>
+  <div class="error" id="err"></div>
+</div>
+
+<script>
+  const DEMO = {
+    "CID-DEMO-001": "demo123",
+    "CID-DEMO-002": "demo456"
+  };
+
+  const redirect = new URLSearchParams(window.location.search).get("redirect");
+  const btn = document.getElementById("loginBtn");
+
+  btn.onclick = () => {
+    let id = document.getElementById("cid").value.trim();
+    let pw = document.getElementById("pwd").value.trim();
+    let e  = document.getElementById("err");
+
+    if (!id || !pw) {
+      e.textContent = "Enter ID + password";
+      return;
+    }
+
+    if (DEMO[id] === pw) {
+      window.location.href = redirect + "?centraId=" + encodeURIComponent(id);
+    } else {
+      e.textContent = "Invalid demo credentials";
+    }
+  };
+</script>
+
+</body>
+</html>
