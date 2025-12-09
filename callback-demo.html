@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>CENTRA Callback Demo</title>
+</head>
+<body style="background:#0f172a; color:white; font-family:system-ui; padding:24px;">
+
+<h2>Callback Page</h2>
+<p id="msg">Waiting for CENTRA login…</p>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const cid = params.get("centraId");
+
+  if (cid) {
+    document.getElementById("msg").textContent =
+      "Logged in via CENTRA ID → " + cid;
+  } else {
+    document.getElementById("msg").textContent =
+      "No CENTRA ID received.";
+  }
+</script>
+
+</body>
+</html>
